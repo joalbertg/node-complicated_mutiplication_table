@@ -3,36 +3,44 @@
 ### Installs
 
 * Without `package.json`.
-
-run `npm install yargs`
-
-run `npm install colors --save`
+```shell
+yarn add yargs colors
+yarn add nodemon --dev
+```
 
 * With `package.json` and packages added.
 
-run `npm install`
+run `yarn install`
+
+### With `Docker`
+```shell
+docker-compose run app yarn add yargs colors
+docker-compose run app yarn add nodemon --dev
+```
 
 ### Structure
 
 run `tree -I "node_modules"`
 ```shell
 .
+├── Dockerfile
 ├── README.md
 ├── app.js
 ├── config
 │   ├── index.js
 │   └── yargs.js
+├── docker-compose.yml
 ├── multiplication-table
 │   ├── index.js
 │   └── multiplication.js
-├── package-lock.json
 ├── package.json
 ├── screenshots
 │   └── show-table.png
-└── table
-    └── default-table.txt
+├── table
+│   └── default-table.txt
+└── yarn.lock
 
-4 directories, 10 files
+4 directories, 12 files
 ```
 
 ### Help
@@ -66,7 +74,7 @@ Options:
 
 ### list command
 
-run `node app list -l 10 -b 7`
+run `node app list -l 10 -b 7` or `docker-compose run app node app list -l 10 -b 7`
 ```shell
 ******************************
 ****MULTIPLICATION TABLE 7****
