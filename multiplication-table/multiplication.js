@@ -1,25 +1,25 @@
 const fs = require('fs');
 
-const generateRow = (num, str) => {
+const generateRow = (base, str) => {
   for (let j = 1; j < 10; j++)
-    str += `${j} * ${num} = ${j * num}\t`;
+    str += `${j} * ${base} = ${j * base}\t`;
   return str += '\n';
 }
 
-const generateDefault = data => {
-  for (let i = 0; i < 10; i++)
+const generateDefault = (data, limit) => {
+  for (let i = 0; i < limit; i++)
     data = generateRow(i, data);
   return data;
 }
 
-const generateByNum = (data, num) => {
-  for (let i = 0; i < 10; i++)
-    data += `${num} * ${i} = ${i * num}\n`;
+const generateByBase = (data, base, limit = 10) => {
+  for (let i = 0; i < limit; i++)
+    data += `${base} * ${i} = ${i * base}\n`;
   return data;
 }
 
-const generateColumn = (data, num) => {
-  return num ? generateByNum(data, num) : generateDefault(data);
+const generateColumn = (data, base, limit) => {
+  return base ? generateByBase(data, base, limit) : generateDefault(data, limit);
 }
 
 const createFile = (data, fileName) => {
@@ -29,19 +29,37 @@ const createFile = (data, fileName) => {
   return 'El archivo ha sido creado.';
 }
 
-const generateTable = (num = null) => {
-  return new Promise((resolve, reject) => {
-    if (num && !Number(num)) {
-      throw new Error(`Parameter ${num} is not a Number.`);
-    }
+const error_validate = noNum => {
+  return new Error(`Parameter ${noNum} is not a Number.`);
+};
 
-    let table = generateColumn('', num);
-    fileName = num ? `table-${num}` : 'default-table';
+const validates = (base, limit) => {
+  if (base && !Number(base)) {
+    throw error_validate(base);
+  } else if (limit && !Number(limit)) {
+    throw error_validate(limit);
+  }
+}
+
+const createTable = (base = null, limit = 10) => {
+  return new Promise(resolve => {
+    validates(base, limit);
+
+    let table = generateColumn('', base, limit);
+    fileName = base ? `table-${base}` : 'default-table';
     resolve(createFile(table, fileName));
   });
 }
 
+const listTable = (base, limit) => {
+  return new Promise(resolve => {
+    validates(base, limit);
+    resolve(generateByBase('', base, limit));
+  });
+}
+
 module.exports = {
-  generateTable
+  createTable,
+  listTable
 };
 

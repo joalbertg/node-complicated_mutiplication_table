@@ -1,19 +1,52 @@
 # Complicated Multiplication Table
 
-run ```node index [--base=<number>]```, this generates a file in table directory.
-
 ### Structure
 
-run ```tree```
+run `tree`
 ```shell
 .
 ├── README.md
-├── index.js
+├── app.js
+├── config
+│   ├── index.js
+│   └── yargs.js
 ├── multiplication-table
 │   ├── index.js
 │   └── multiplication.js
+├── package-lock.json
+├── package.json
 └── table
+    └── default-table.txt
 
-2 directories, 4 files
+3 directories, 9 files
+```
+
+### Help
+
+run `node app --help`
+```shell
+app [command]
+
+Commands:
+  app list    Imprime en consola la table de Multiplicar.
+  app create  Crea un archivo con la tabla de Multiplicar por
+              defecto o especifico a la base.
+
+Options:
+  --version  Show version number                           [boolean]
+  --help     Show help                                     [boolean]
+```
+run `node app create --help`
+```shell
+app create
+
+Crea un archivo con la tabla de Multiplicar por defecto o especifico
+a la base.
+
+Options:
+  --version    Show version number                         [boolean]
+  --help       Show help                                   [boolean]
+  --base, -b
+  --limit, -l                                          [default: 10]
 ```
 
