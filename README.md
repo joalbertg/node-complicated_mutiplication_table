@@ -1,5 +1,14 @@
 # Complicated Multiplication Table
 
+### Installs
+
+* Without `package.json`.
+run `npm install yargs`
+run `npm install colors --save`
+
+* With `package.json` and packages added.
+run `npm install`
+
 ### Structure
 
 run `tree`

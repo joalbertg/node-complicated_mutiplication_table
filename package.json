@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/joalbertg/node-complicated_mutiplication_table#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "yargs": "^15.3.1"
   }
 }

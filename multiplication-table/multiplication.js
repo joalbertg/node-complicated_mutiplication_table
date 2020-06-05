@@ -1,4 +1,5 @@
 const fs = require('fs');
+const colors = require('colors');
 
 const generateRow = (base, str) => {
   for (let j = 1; j < 10; j++)
@@ -6,16 +7,24 @@ const generateRow = (base, str) => {
   return str += '\n';
 }
 
+const validateLimit = limit => {
+  if (limit === 0)
+    return 10;
+  return limit;
+}
+
 const generateDefault = (data, limit) => {
+  limit = validateLimit(limit);
   for (let i = 0; i < limit; i++)
     data = generateRow(i, data);
   return data;
 }
 
 const generateByBase = (data, base, limit = 10) => {
+  limit = validateLimit(limit);
   for (let i = 0; i < limit; i++)
     data += `${base} * ${i} = ${i * base}\n`;
-  return data;
+  return data.brightMagenta;
 }
 
 const generateColumn = (data, base, limit) => {
@@ -51,9 +60,16 @@ const createTable = (base = null, limit = 10) => {
   });
 }
 
+const header = base => {
+  console.log('******************************'.green);
+  console.log(`****MULTIPLICATION TABLE ${base}****`.green);
+  console.log('******************************'.green);
+};
+
 const listTable = (base, limit) => {
   return new Promise(resolve => {
     validates(base, limit);
+    header(base);
     resolve(generateByBase('', base, limit));
   });
 }

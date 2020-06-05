@@ -1,3 +1,5 @@
+const colors = require('colors');
+
 const { argv } = require('./config');
 const { createTable, listTable } = require('./multiplication-table');
 
@@ -19,10 +21,10 @@ switch (command) {
     break;
   case 'create':
     createTable(argv.base | argv.b, argv.limit | argv.l)
-      .then(console.log)
+      .then(resp => console.log(`${'Archivo creado:'.red} ${resp.green}`))
       .catch(error => console.error(error.message));
     break;
   default:
-    console.log('Command not found.');
+    console.log('Command not found.'.red);
 }
 
