@@ -1,7 +1,8 @@
 const colors = require('colors');
 
 const { argv } = require('./config');
-const { createTable, listTable } = require('./multiplication-table');
+const { createTable, listTable } = require('./services');
+const { list, create } = require('./decorators');
 
 // Antes de yargs
 //console.log(process.argv);
@@ -12,17 +13,19 @@ const { createTable, listTable } = require('./multiplication-table');
 // $>node index create
 //argv => { _: [ 'create' ], '$0': 'app' }
 const command = argv._[0];
+//console.log(argv);
+
+const actions = {
+  LIST: 'list',
+  CREATE: 'create'
+};
 
 switch (command) {
-  case 'list':
-    listTable(argv.base | argv.b, argv.limit | argv.l)
-      .then(console.log)
-      .catch(error => console.error(error.message));
+  case actions.LIST:
+    list(argv.base, argv.limit);
     break;
-  case 'create':
-    createTable(argv.base | argv.b, argv.limit | argv.l)
-      .then(resp => console.log(`${'Archivo creado:'.red} ${resp.green}`))
-      .catch(error => console.error(error.message));
+  case actions.CREATE:
+    create(argv.base, argv.limit);
     break;
   default:
     console.log('Command not found.'.red);
