@@ -66,7 +66,7 @@ run `tree -I "node_modules|screenshots"`
 
 ### Help
 
-> run `docker-compose run app node app --help`
+> run `docker-compose run app node src/app --help`
 ```shell
 app [command]
 
@@ -80,7 +80,7 @@ Options:
   --help     Show help                                     [boolean]
 ```
 
-> run `docker-compose run app node app create --help`
+> run `docker-compose run app node src/app create --help`
 ```shell
 app create
 
@@ -109,7 +109,7 @@ Options:
 
 * command list
 
-> run `docker-compose run app node app list -l 10 -b 7`
+> run `docker-compose run app node src/app list -l 10 -b 7`
 ```shell
 ******************************
 ****MULTIPLICATION TABLE 7****
@@ -128,7 +128,7 @@ Options:
 
 * command create
 
-> run `docker-compose run app node app create`, this generate a default file.
+> run `docker-compose run app node src/app create`, this generate a default file.
 ```shell
 Archivo creado: El archivo ha sido creado.
 ```

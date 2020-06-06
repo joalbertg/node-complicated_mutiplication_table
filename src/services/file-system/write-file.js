@@ -1,10 +1,11 @@
 const fs = require('fs');
 
 const createFile = (data, fileName) => {
-  fs.writeFile(`./file-outputs/${fileName}.txt`, data, error => {
+  const uri = `./file-outputs/${fileName}.txt`;
+  fs.writeFileSync(uri, data, error => {
     if (error) throw error;
   });
-  return 'El archivo ha sido creado.';
+  return uri;
 }
 
 module.exports = {
